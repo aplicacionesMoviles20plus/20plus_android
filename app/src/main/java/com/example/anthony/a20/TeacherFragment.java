@@ -2,9 +2,11 @@ package com.example.anthony.a20;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.anthony.a20.Adapters.TeacherAdapter;
@@ -35,6 +37,15 @@ public class TeacherFragment extends Fragment {
         TeacherAdapter teacherAdapter = new TeacherAdapter(getActivity(),teachers,R.color.white);
         final ListView listView = (ListView)rootView.findViewById(R.id.teacher_list);
         listView.setAdapter(teacherAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                CVTeacherFragment cvTeacherFragment = new CVTeacherFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container,cvTeacherFragment);
+                transaction.commit();
+            }
+        });
         return rootView;
     }
 
