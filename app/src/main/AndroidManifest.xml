@@ -34,15 +34,6 @@
             android:value="com.example.anthony.a20.Entities" />
 
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".ForgotPasswordActivity"
             android:label="¿Olvidaste tu contraseña?" />
         <activity android:name=".RegisterActivity" />

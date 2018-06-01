@@ -27,7 +27,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 alert.setMessage("Contraseña enviada al correo"+email.getText().toString() );
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Intent a = new Intent(getApplicationContext(),LoginActivity.class);
+                        Intent a = new Intent(getApplicationContext(),MainActivity.class);
                         startActivity(a);
                     }
                 });
