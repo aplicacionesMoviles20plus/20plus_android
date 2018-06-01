@@ -8,14 +8,16 @@
     android:layout_margin="10dp"
     >
 
-    <ImageView
-        android:id="@+id/img_profile"
+    <de.hdodenhof.circleimageview.CircleImageView
+       android:id="@+id/img_profile"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"
+
         />
     <TextView
         android:id="@+id/txt_image"
