@@ -3,6 +3,7 @@ package com.example.anthony.a20;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,8 +11,12 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -134,12 +139,26 @@ public class RegisterActivity extends AppCompatActivity {
         myAlertDialog.setNegativeButton("Camara",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
+                       /* if (ContextCompat.checkSelfPermission(RegisterActivity.this,
+                                android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+                            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                                    RegisterActivity.this, android.Manifest.permission.CAMERA)) {
+
+
+                            } else {
+                                ActivityCompat.requestPermissions(RegisterActivity.this ,
+                                        new String[]{android.Manifest.permission.CAMERA},
+                                        MY_PERMISSIONS_REQUEST_CAMERA);
+                            }
+
+                        }*/
                         Intent intent = new Intent(
                                 MediaStore.ACTION_IMAGE_CAPTURE);
                         File f = new File(android.os.Environment
                                 .getExternalStorageDirectory(), "temp.jpg");
                         intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                                Uri.fromFile(f));
+                                FileProvider.getUriForFile(RegisterActivity.this,"com.example.anthony.a20.provider",f));
 
                         startActivityForResult(intent,
                                 CAMERA_REQUEST);
