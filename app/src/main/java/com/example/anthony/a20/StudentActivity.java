@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class StudentActivity extends FragmentActivity implements CVTeacherFragment.OnFragmentInteractionListener{
+public class StudentActivity extends FragmentActivity implements CVTeacherFragment.OnFragmentInteractionListener, ScheduleFragment.OnFragmentInteractionListener{
 
     private TextView mTextMessage;
 
