@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -16,14 +17,42 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Si esta iniciada la sesion
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Variables
         mAuth = FirebaseAuth.getInstance();
         Button btnLogIn = findViewById(R.id.btn_login);
+        TextView txtRegister = findViewById(R.id.txt_register);
+        TextView txtForgotPassword = findViewById(R.id.txt_forgotpassword);
+        //Funciones click
+        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getApplicationContext(),ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        txtRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getApplicationContext(),RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,13 +63,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //Si esta iniciada la sesion
-        FirebaseUser currentUser = mAuth.getCurrentUser();
 
-    }
     private void Login(String email, String password) {
         Log.d("login", "signIn:" + email);
         //if (!validateForm()) {
