@@ -1,5 +1,6 @@
 package com.example.anthony.a20;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -162,6 +163,7 @@ public class RegisterActivity extends AppCompatActivity {
                     f = temp;
                     break;
                 }
+
             }
             if (!f.exists()) {
                 Toast.makeText(getBaseContext(),
@@ -200,6 +202,10 @@ public class RegisterActivity extends AppCompatActivity {
                 matrix.postRotate(rotate);
                 bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
                         bitmap.getHeight(), matrix, true);
+                Uri tempUri = getImageUri(getApplicationContext(), bitmap);
+                selectedImagePath=getRealPathFromURI(tempUri);
+                txt_image_path=selectedImagePath;
+                Log.d("path",selectedImagePath);
                 img_profile.setImageBitmap(bitmap);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
@@ -222,6 +228,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (selectedImagePath != null) {
                     txt_image_path=selectedImagePath;
+                    Log.d("path",selectedImagePath);
                 }
                 img_profile.setImageURI(selectedImage);
             } else {
@@ -269,6 +276,19 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
     }
     /*
     private boolean validateForm() {
