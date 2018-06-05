@@ -84,9 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                 createAccount(email,password);
             }
         });
-
     }
-
     private void createAccount(final String email, String password) {
         Log.d("login", "signIn:" + email);
         //if (!validateForm()) {
@@ -116,7 +114,6 @@ public class RegisterActivity extends AppCompatActivity {
                 });
         // [END sign_in_with_email]
     }
-
     private void startDialogImage() {
         AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(
                 this);
@@ -167,7 +164,6 @@ public class RegisterActivity extends AppCompatActivity {
                 });
         myAlertDialog.show();
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -256,11 +252,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
     }
-
     //Subir imagen
-
-    private void UploadImage(String email)
-    {
+    private void UploadImage(String email){
         storageRef= FirebaseStorage.getInstance().getReference();
         Uri file = Uri.fromFile(new File(txt_image_path));
 
@@ -296,7 +289,6 @@ public class RegisterActivity extends AppCompatActivity {
                 });
 
     }
-
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
@@ -309,28 +301,24 @@ public class RegisterActivity extends AppCompatActivity {
         int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
         return cursor.getString(idx);
     }
-    /*
+
     private boolean validateForm() {
         boolean valid = true;
         editTextEmail = findViewById(R.id.edt_Correo);
         editTextPassword= findViewById(R.id.edt_Contraseña);
         String email = editTextEmail.getText().toString();
-        if (TextUtils.isEmpty(email)) {
+        if (email.isEmpty()) {
             editTextEmail.setError("Required.");
             valid = false;
-        } else {
-            editTextEmail.setError(null);
         }
         String password = editTextPassword.getText().toString();
-        if (TextUtils.isEmpty(password)) {
+        if (password.isEmpty()) {
             editTextPassword.setError("Required.");
             valid = false;
-        } else {
-            editTextPassword.setError(null);
         }
         return valid;
     }
-*/
+
 
 
 }

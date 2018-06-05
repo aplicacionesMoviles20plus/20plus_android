@@ -2,6 +2,7 @@ package com.example.anthony.a20;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,9 +59,27 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 EditText editTextEmail = findViewById(R.id.email);
                 EditText editTextContra = findViewById(R.id.password);
+                if (validation(editTextContra.getText().toString(),editTextEmail.getText().toString()))
                 Login(editTextEmail.getText().toString(),editTextContra.getText().toString());
+                else
+                {
+                    AlertDialog.Builder alert= new AlertDialog.Builder(MainActivity.this);
+                    alert.setMessage("Campos vacios. Ingrese correo y/o contrasena");
+                    alert.setTitle("Alerta");
+                    AlertDialog dialog =alert.create();
+                    dialog.show();
+                }
             }
         });
+    }
+
+    private boolean validation(String a, String b)
+    {
+        if (a.isEmpty()||b.isEmpty())
+        {
+            return false;
+        }
+        return true;
     }
 
 
