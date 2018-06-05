@@ -17,7 +17,9 @@ public class Profesor {
      private long calificacion        ;
      private long dni                 ;
      private String antecedentes     ;
-     private String numerotarjeta    ;
+     private String fotourl;
+     private int id_metodopago ;
+
 
     public String toJson(){
         String jsonText = null;
@@ -37,7 +39,8 @@ public class Profesor {
             jsonObject.put("calificacion", getCalificacion());
             jsonObject.put("dni", getDni());
             jsonObject.put("antecedentes", getAntecedentes());
-            jsonObject.put("numerotarjeta", getNumerotarjeta());
+            jsonObject.put("fotourl", getFotourl());
+            jsonObject.put("id_metodopago", getId_metodopago());
 
 
             jsonText = jsonObject.toString();
@@ -152,11 +155,20 @@ public class Profesor {
         this.antecedentes = antecedentes;
     }
 
-    public String getNumerotarjeta() {
-        return numerotarjeta;
+
+    public String getFotourl() {
+        return fotourl;
     }
 
-    public void setNumerotarjeta(String numerotarjeta) {
-        this.numerotarjeta = numerotarjeta;
+    public void setFotourl(String fotourl) {
+        this.fotourl = fotourl;
+    }
+
+    public int getId_metodopago() {
+        return id_metodopago;
+    }
+
+    public void setId_metodopago(int id_metodopago) {
+        this.id_metodopago = id_metodopago;
     }
 }

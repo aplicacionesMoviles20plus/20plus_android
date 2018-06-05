@@ -15,6 +15,7 @@ public class Padre {
     private String direccion ;
     private int celular ;
     private int dni ;
+    private String fotourl;
 
     public String toJson(){
         String jsonText = null;
@@ -31,7 +32,7 @@ public class Padre {
             jsonObject.put("direccion", getDireccion());
             jsonObject.put("celular", getCelular());
             jsonObject.put("dni", getDni());
-
+            jsonObject.put("fotourl", getFotourl());
 
             jsonText = jsonObject.toString();
         } catch (JSONException e) {
@@ -127,5 +128,13 @@ public class Padre {
 
     public void setDni(int dni) {
         this.dni = dni;
+    }
+
+    public String getFotourl() {
+        return fotourl;
+    }
+
+    public void setFotourl(String fotourl) {
+        this.fotourl = fotourl;
     }
 }
