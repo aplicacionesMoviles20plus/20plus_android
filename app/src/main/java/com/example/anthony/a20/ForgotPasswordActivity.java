@@ -29,7 +29,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 EditText edtForgotEmail = findViewById(R.id.txt_forgotemail);
-                emailIsRegistered(edtForgotEmail.getText().toString());
+                String email = edtForgotEmail.getText().toString();
+                if (email.isEmpty())
+                {
+                    edtForgotEmail.setError("Required");
+                }
+                else emailIsRegistered(email);
             }
         });
     }
@@ -63,7 +68,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //Dialogo
                             AlertDialog.Builder alert= new AlertDialog.Builder(ForgotPasswordActivity.this);
-                            alert.setMessage("Contraseña enviada al correo"+email );
+                            alert.setMessage("Contraseña enviada al correo "+email );
                             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     Intent a = new Intent(getApplicationContext(),MainActivity.class);

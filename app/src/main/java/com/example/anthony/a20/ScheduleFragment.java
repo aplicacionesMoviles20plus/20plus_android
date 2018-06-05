@@ -4,22 +4,26 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.Spinner;
+
+import com.example.anthony.a20.Adapters.DaySpinnerAdapter;
+
+import java.util.Calendar;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CVTeacherFragment.OnFragmentInteractionListener} interface
+ * {@link ScheduleFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link CVTeacherFragment#newInstance} factory method to
+ * Use the {@link ScheduleFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CVTeacherFragment extends Fragment {
+public class ScheduleFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +35,7 @@ public class CVTeacherFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public CVTeacherFragment() {
+    public ScheduleFragment() {
         // Required empty public constructor
     }
 
@@ -41,11 +45,11 @@ public class CVTeacherFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CVTeacherFragment.
+     * @return A new instance of fragment ScheduleFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CVTeacherFragment newInstance(String param1, String param2) {
-        CVTeacherFragment fragment = new CVTeacherFragment();
+    public static ScheduleFragment newInstance(String param1, String param2) {
+        ScheduleFragment fragment = new ScheduleFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -53,10 +57,10 @@ public class CVTeacherFragment extends Fragment {
         return fragment;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -67,19 +71,9 @@ public class CVTeacherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView= inflater.inflate(R.layout.fragment_cvteacher, container, false);
-        Button btn_horario = rootView.findViewById(R.id.btn_schedule);
-        btn_horario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ScheduleFragment scheduleFragment = new ScheduleFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container,scheduleFragment);
-                transaction.commit();
-            }
-        });
-
-
+        View rootView= inflater.inflate(R.layout.fragment_schedule, container, false);
+        Spinner spinnerDateIn = (Spinner) rootView.findViewById(R.id.spinner_days);
+        spinnerDateIn.setAdapter(new DaySpinnerAdapter(getContext(), 7));
         return rootView;
     }
 

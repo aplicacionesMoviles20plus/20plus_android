@@ -4,7 +4,6 @@
     android:layout_height="fill_parent"
     android:background="#ffffff"
     android:fillViewport="true"
-
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -79,15 +78,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/txtDistritos"
-            app:layout_constraintBottom_toTopOf="@id/txtHorario"
+            app:layout_constraintBottom_toTopOf="@id/btn_schedule"
             />
-        <TextView
-            android:id="@+id/txtHorario"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_schedule"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Ver Horario"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:text="Hola"
-            app:layout_constraintTop_toBottomOf="@id/list_distrit"
             />
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
