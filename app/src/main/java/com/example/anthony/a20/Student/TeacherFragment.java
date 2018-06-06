@@ -1,4 +1,4 @@
-package com.example.anthony.a20;
+package com.example.anthony.a20.Student;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +11,8 @@ import android.widget.ListView;
 
 import com.example.anthony.a20.Adapters.TeacherAdapter;
 import com.example.anthony.a20.Entities.Teacher;
+import com.example.anthony.a20.R;
+import com.example.anthony.a20.Student.CVTeacherFragment;
 
 
 import java.util.ArrayList;

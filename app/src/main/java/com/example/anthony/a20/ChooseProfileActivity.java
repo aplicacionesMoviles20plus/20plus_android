@@ -1,11 +1,12 @@
 package com.example.anthony.a20;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.anthony.a20.Student.StudentActivity;
 
 public class ChooseProfileActivity extends AppCompatActivity {
 

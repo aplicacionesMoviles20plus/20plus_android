@@ -22,12 +22,14 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+
+
+
     @Override
     protected void onStart() {
         super.onStart();
         //Si esta iniciada la sesion
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

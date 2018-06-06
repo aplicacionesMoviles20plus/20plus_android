@@ -11,7 +11,6 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
-import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -24,8 +23,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -46,9 +43,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class RegisterActivity extends AppCompatActivity {
-    public static final int PICK_IMAGE = 1;
     private FirebaseAuth mAuth;
-    StorageReference storageRef ;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private CircleImageView img_profile;
@@ -58,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String txt_image_path;
     Bitmap bitmap;
     String selectedImagePath;
-
+    StorageReference storageRef ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,46 +81,32 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
     private void CameraPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_DENIED)
         {
-
             ActivityCompat.requestPermissions(this,new String[] {android.Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
-
-
+        }
+        else{
+            openCamera();
         }
 
 
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MY_CAMERA_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(
-                        MediaStore.ACTION_IMAGE_CAPTURE);
-                File f = new File(android.os.Environment
-                        .getExternalStorageDirectory(), "temp.jpg");
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                        FileProvider.getUriForFile(RegisterActivity.this,"com.example.anthony.a20.provider",f));
-
-                startActivityForResult(intent,
-                        CAMERA_REQUEST);
-
+               openCamera();
             } else {
-
                 Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
-
             }
 
         }
     }
-
     private void createAccount(final String email, String password) {
         Log.d("login", "signIn:" + email);
         //if (!validateForm()) {
@@ -179,6 +160,17 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
         myAlertDialog.show();
+    }
+    private void openCamera(){
+        Intent intent = new Intent(
+                MediaStore.ACTION_IMAGE_CAPTURE);
+        File f = new File(android.os.Environment
+                .getExternalStorageDirectory(), "temp.jpg");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                FileProvider.getUriForFile(RegisterActivity.this,"com.example.anthony.a20.provider",f));
+
+        startActivityForResult(intent,
+                CAMERA_REQUEST);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -268,7 +260,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
     }
-    //Subir imagen
     private void UploadImage(String email){
         storageRef= FirebaseStorage.getInstance().getReference();
         Uri file = Uri.fromFile(new File(txt_image_path));
@@ -317,7 +308,6 @@ public class RegisterActivity extends AppCompatActivity {
         int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
         return cursor.getString(idx);
     }
-
     private boolean validateForm() {
         boolean valid = true;
         editTextEmail = findViewById(R.id.edt_Correo);
@@ -334,7 +324,4 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return valid;
     }
-
-
-
 }
