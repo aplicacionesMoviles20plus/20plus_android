@@ -54,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
     private CircleImageView img_profile;
     protected static final int GALLERY_PICTURE = 1;
     protected static final int CAMERA_REQUEST = 0;
+    protected static final int MY_CAMERA_REQUEST_CODE=100;
     private String txt_image_path;
     Bitmap bitmap;
     String selectedImagePath;
@@ -85,6 +86,46 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void CameraPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_DENIED)
+        {
+
+            ActivityCompat.requestPermissions(this,new String[] {android.Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+
+
+        }
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_CAMERA_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(
+                        MediaStore.ACTION_IMAGE_CAPTURE);
+                File f = new File(android.os.Environment
+                        .getExternalStorageDirectory(), "temp.jpg");
+                intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        FileProvider.getUriForFile(RegisterActivity.this,"com.example.anthony.a20.provider",f));
+
+                startActivityForResult(intent,
+                        CAMERA_REQUEST);
+
+            } else {
+
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+
+            }
+
+        }
+    }
+
     private void createAccount(final String email, String password) {
         Log.d("login", "signIn:" + email);
         //if (!validateForm()) {
@@ -129,37 +170,12 @@ public class RegisterActivity extends AppCompatActivity {
                         startActivityForResult(
                                 pictureActionIntent,
                                 GALLERY_PICTURE);
-
                     }
                 });
-
         myAlertDialog.setNegativeButton("Camara",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-                       /* if (ContextCompat.checkSelfPermission(RegisterActivity.this,
-                                android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-
-                            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                                    RegisterActivity.this, android.Manifest.permission.CAMERA)) {
-
-
-                            } else {
-                                ActivityCompat.requestPermissions(RegisterActivity.this ,
-                                        new String[]{android.Manifest.permission.CAMERA},
-                                        MY_PERMISSIONS_REQUEST_CAMERA);
-                            }
-
-                        }*/
-                        Intent intent = new Intent(
-                                MediaStore.ACTION_IMAGE_CAPTURE);
-                        File f = new File(android.os.Environment
-                                .getExternalStorageDirectory(), "temp.jpg");
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                                FileProvider.getUriForFile(RegisterActivity.this,"com.example.anthony.a20.provider",f));
-
-                        startActivityForResult(intent,
-                                CAMERA_REQUEST);
-
+                        CameraPermission();
                     }
                 });
         myAlertDialog.show();
