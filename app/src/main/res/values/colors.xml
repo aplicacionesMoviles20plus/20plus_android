@@ -14,5 +14,6 @@
     <color name="orangedark">#BB6008</color>
     <color name="black">#000000</color>
     <color name="blue">#00537D</color>
-
+    <color name="startblue">#09c6df</color>
+    <color name="endblue">#0bcce6</color>
 </resources>

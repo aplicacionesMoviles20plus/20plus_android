@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.anthony.a20.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -86,6 +87,8 @@ public class StudentProfileFragment extends Fragment {
         View rootView= inflater.inflate(R.layout.fragment_student_profile, container, false);
         new DownloadImageTask((ImageView)rootView.findViewById(R.id.img_studentprofile))
                 .execute(currentUser.getPhotoUrl().toString());
+        TextView textViewEmail = rootView.findViewById(R.id.txt_emailstudent);
+        textViewEmail.setText(currentUser.getEmail());
         return rootView;
     }
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
