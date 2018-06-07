@@ -17,6 +17,21 @@ public class Padre {
     private int dni ;
     private String fotourl;
 
+    public Padre(int idpadre, String nombre, String apellido, String password, String email, String departamento, String provincia, String distrito, String direccion, int celular, int dni, String fotourl) {
+        this.idpadre = idpadre;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.password = password;
+        this.email = email;
+        this.departamento = departamento;
+        this.provincia = provincia;
+        this.distrito = distrito;
+        this.direccion = direccion;
+        this.celular = celular;
+        this.dni = dni;
+        this.fotourl = fotourl;
+    }
+
     public String toJson(){
         String jsonText = null;
 

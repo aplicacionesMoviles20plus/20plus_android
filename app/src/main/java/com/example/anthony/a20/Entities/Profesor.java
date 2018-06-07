@@ -11,15 +11,32 @@ public class Profesor {
      private String email            ;
      private String celular          ;
      private String descripcion      ;
-     private Float preciomin          ;
-     private Float preciomax          ;
-      private String  experiencia     ;
+     private Double preciomin          ;
+     private Double preciomax          ;
+     private String  experiencia     ;
      private long calificacion        ;
      private long dni                 ;
      private String antecedentes     ;
-     private String fotourl;
-     private int id_metodopago ;
+     private String fotourl              ;
+     private int id_metodopago      ;
 
+    public Profesor(int idprofesor, String nombre, String apellido, String password, String email, String celular, String descripcion, Double preciomin, Double preciomax, String experiencia, long calificacion, long dni, String antecedentes, String fotourl, int id_metodopago) {
+        this.idprofesor = idprofesor;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.password = password;
+        this.email = email;
+        this.celular = celular;
+        this.descripcion = descripcion;
+        this.preciomin = preciomin;
+        this.preciomax = preciomax;
+        this.experiencia = experiencia;
+        this.calificacion = calificacion;
+        this.dni = dni;
+        this.antecedentes = antecedentes;
+        this.fotourl = fotourl;
+        this.id_metodopago = id_metodopago;
+    }
 
     public String toJson(){
         String jsonText = null;
@@ -107,19 +124,19 @@ public class Profesor {
         this.descripcion = descripcion;
     }
 
-    public Float getPreciomin() {
+    public Double getPreciomin() {
         return preciomin;
     }
 
-    public void setPreciomin(Float preciomin) {
+    public void setPreciomin(Double preciomin) {
         this.preciomin = preciomin;
     }
 
-    public Float getPreciomax() {
+    public Double getPreciomax() {
         return preciomax;
     }
 
-    public void setPreciomax(Float preciomax) {
+    public void setPreciomax(Double preciomax) {
         this.preciomax = preciomax;
     }
 
