@@ -16,7 +16,10 @@ public class Padre {
     private int celular ;
     private int dni ;
     private String fotourl;
+    public Padre()
+    {
 
+    }
     public Padre(int idpadre, String nombre, String apellido, String password, String email, String departamento, String provincia, String distrito, String direccion, int celular, int dni, String fotourl) {
         this.idpadre = idpadre;
         this.nombre = nombre;

@@ -21,7 +21,7 @@ public class ProfeRepo implements IProfeRepo {
 
         try {
             apiUrl =
-                    new URL("http://localhost:9990/api/profesors?email="+email);
+                    new URL("http://192.168.1.11/api/profesors?email="+email);
 
             //Crear conexión
             HttpURLConnection myConnection =
@@ -145,7 +145,7 @@ public class ProfeRepo implements IProfeRepo {
 
         try {
             apiUrl =
-                    new URL("http://localhost:9990/api/profesors");
+                    new URL("http://192.168.1.11:9990/api/profesors");
 
             //Crear conexión
             HttpURLConnection myConnection =
@@ -267,7 +267,7 @@ public class ProfeRepo implements IProfeRepo {
         boolean result=false;
         try{
             URL apiUrl =
-                    new URL("http://localhost:9990/api/profesors");
+                    new URL("http://192.168.1.11:9990/api/profesors");
 
             //crear conexion
             HttpURLConnection myConnection=(HttpURLConnection)apiUrl.openConnection();

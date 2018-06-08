@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -24,6 +25,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.anthony.a20.BusinessLogic.IPadreRepo;
+import com.example.anthony.a20.BusinessLogic.PadreRepo;
+import com.example.anthony.a20.Entities.Padre;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,6 +51,8 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private EditText editTextNombres;
+    private EditText editTextApellidos;
     private CircleImageView img_profile;
     protected static final int GALLERY_PICTURE = 1;
     protected static final int CAMERA_REQUEST = 0;
@@ -81,6 +88,47 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Button btn_register = findViewById(R.id.btn_save);
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editTextEmail = findViewById(R.id.edt_Correo);
+                editTextPassword = findViewById(R.id.edt_Contraseña);
+                editTextNombres = findViewById(R.id.edt_Nombres);
+                editTextApellidos = findViewById(R.id.edt_Apellidos);
+
+                final String email = editTextEmail.getText().toString();
+                final String password = editTextPassword.getText().toString();
+                final String nombres=editTextNombres.getText().toString();
+                final String apellidos=editTextApellidos.getText().toString();
+                Log.d("login", "signIn:" + email);
+
+
+                Padre padre=new Padre();
+                padre.setCelular(123);
+                padre.setDepartamento("Lima");
+                padre.setDireccion("Calle 666");
+                padre.setDistrito("VMT");
+                padre.setDni(72247861);
+                padre.setEmail(email);
+                padre.setFotourl("");
+                padre.setNombre(nombres);
+                padre.setPassword(password);
+                padre.setProvincia("Lima");
+                padre.setApellido(apellidos);
+                PostTask postTask = new PostTask();
+                postTask.execute(padre);
+
+                createAccount(email, password);
+            }
+        });
+    }
+
     private void CameraPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.CAMERA)
@@ -323,5 +371,23 @@ public class RegisterActivity extends AppCompatActivity {
             valid = false;
         }
         return valid;
+    }
+
+    class PostTask extends AsyncTask<Padre,Void,Void> {
+
+
+
+        @Override
+        protected Void doInBackground(Padre... padres) {
+            IPadreRepo padreAPI = new PadreRepo();
+            padreAPI.createPadre(padres[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //Toast.makeText(getContext(),"EXITO",Toast.LENGTH_LONG);
+        }
     }
 }
