@@ -32,4 +32,13 @@ public class ChooseProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        if (1==1) {
+
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

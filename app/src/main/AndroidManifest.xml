@@ -39,7 +39,7 @@
             <!-- ressource file to create -->
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <meta-data
@@ -72,7 +72,8 @@
         </activity>
         <activity
             android:name=".Teacher.TeacherActivity"
-            android:label="@string/title_activity_teacher"></activity>
+            android:label="@string/title_activity_teacher" />
+        <activity android:name=".CalendarActivity"></activity>
     </application>
 
 </manifest>

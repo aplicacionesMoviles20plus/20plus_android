@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.anthony.a20.R;
-import com.example.anthony.a20.ScheduleFragment;
 
 
 /**
@@ -72,15 +71,7 @@ public class CVTeacherFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView= inflater.inflate(R.layout.fragment_cvteacher, container, false);
         Button btn_horario = rootView.findViewById(R.id.btn_schedule);
-        btn_horario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ScheduleFragment scheduleFragment = new ScheduleFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container,scheduleFragment);
-                transaction.commit();
-            }
-        });
+
 
 
         return rootView;

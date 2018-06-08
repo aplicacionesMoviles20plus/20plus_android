@@ -10,9 +10,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.anthony.a20.R;
-import com.example.anthony.a20.ScheduleFragment;
 
-public class StudentActivity extends FragmentActivity implements CVTeacherFragment.OnFragmentInteractionListener, ScheduleFragment.OnFragmentInteractionListener, StudentProfileFragment.OnFragmentInteractionListener {
+public class StudentActivity extends FragmentActivity implements CVTeacherFragment.OnFragmentInteractionListener, StudentProfileFragment.OnFragmentInteractionListener {
 
     private TextView mTextMessage;
 
