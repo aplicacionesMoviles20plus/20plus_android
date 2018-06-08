@@ -13,12 +13,14 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+
     <application
         android:name="com.orm.SugarApp"
         android:allowBackup="true"
@@ -33,12 +35,13 @@
             android:authorities="com.example.anthony.a20.provider"
             android:exported="false"
             android:grantUriPermissions="true">
+
             <!-- ressource file to create -->
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths">
-            </meta-data>
+                android:resource="@xml/file_paths"></meta-data>
         </provider>
+
         <meta-data
             android:name="DATABASE"
             android:value="sugar_example.db" />
@@ -67,6 +70,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Teacher.TeacherActivity"
+            android:label="@string/title_activity_teacher"></activity>
     </application>
 
 </manifest>

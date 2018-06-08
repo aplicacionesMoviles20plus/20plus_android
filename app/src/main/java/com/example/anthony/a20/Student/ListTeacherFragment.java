@@ -17,9 +17,9 @@ import com.example.anthony.a20.Student.CVTeacherFragment;
 
 import java.util.ArrayList;
 
-public class TeacherFragment extends Fragment {
+public class ListTeacherFragment extends Fragment {
 
-    public TeacherFragment() {
+    public ListTeacherFragment() {
         // Required empty public constructor
     }
 

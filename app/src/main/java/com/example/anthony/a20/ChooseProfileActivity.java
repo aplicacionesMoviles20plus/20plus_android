@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.anthony.a20.Student.StudentActivity;
+import com.example.anthony.a20.Teacher.TeacherActivity;
 
 public class ChooseProfileActivity extends AppCompatActivity {
 
@@ -15,10 +16,18 @@ public class ChooseProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_profile);
         ImageView student = findViewById(R.id.img_student);
+        ImageView teacher = findViewById(R.id.img_teacher);
         student.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),StudentActivity.class);
+                startActivity(intent);
+            }
+        });
+        teacher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),TeacherActivity.class);
                 startActivity(intent);
             }
         });

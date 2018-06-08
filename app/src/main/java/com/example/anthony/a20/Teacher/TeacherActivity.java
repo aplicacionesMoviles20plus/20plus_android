@@ -1,4 +1,4 @@
-package com.example.anthony.a20.Student;
+package com.example.anthony.a20.Teacher;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -6,13 +6,14 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.anthony.a20.R;
-import com.example.anthony.a20.ScheduleFragment;
+import com.example.anthony.a20.Student.ListTeacherFragment;
 
-public class StudentActivity extends FragmentActivity implements CVTeacherFragment.OnFragmentInteractionListener, ScheduleFragment.OnFragmentInteractionListener, StudentProfileFragment.OnFragmentInteractionListener {
+public class TeacherActivity extends FragmentActivity implements TeacherScheduleFragment.OnFragmentInteractionListener{
 
     private TextView mTextMessage;
 
@@ -21,14 +22,17 @@ public class StudentActivity extends FragmentActivity implements CVTeacherFragme
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment=null;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    fragment=new ListTeacherFragment();break;
+                    mTextMessage.setText(R.string.title_home);
+                    return true;
+                case R.id.navigation_dashboard:
+                    mTextMessage.setText(R.string.title_dashboard);
+                    return true;
                 case R.id.navigation_notifications:
-                    fragment=new StudentProfileFragment();break;
+                    mTextMessage.setText(R.string.title_notifications);
+                    return true;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
             return false;
         }
     };
@@ -36,13 +40,13 @@ public class StudentActivity extends FragmentActivity implements CVTeacherFragme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student);
+        setContentView(R.layout.activity_teacher);
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         Fragment fragment=null;
-        fragment= new ListTeacherFragment();
+        fragment= new TeacherScheduleFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
     }
 
