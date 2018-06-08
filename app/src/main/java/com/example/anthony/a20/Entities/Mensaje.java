@@ -14,6 +14,16 @@ public class Mensaje {
    private int id_profe ;
    private String remitente ;
 
+    public Mensaje(int idmensaje, String hora, Date fecha, String contenido, int id_padre, int id_profe, String remitente) {
+        this.idmensaje = idmensaje;
+        this.hora = hora;
+        this.fecha = fecha;
+        this.contenido = contenido;
+        this.id_padre = id_padre;
+        this.id_profe = id_profe;
+        this.remitente = remitente;
+    }
+
     public String toJson(){
         String jsonText = null;
 

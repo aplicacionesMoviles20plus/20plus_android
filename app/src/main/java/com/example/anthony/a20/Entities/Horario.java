@@ -6,6 +6,13 @@ public class Horario {
     private String horafin;
     private String dia;
 
+    public Horario(int idhorario, String horainicio, String horafin, String dia) {
+        this.idhorario = idhorario;
+        this.horainicio = horainicio;
+        this.horafin = horafin;
+        this.dia = dia;
+    }
+
     public int getIdhorario() {
         return idhorario;
     }
