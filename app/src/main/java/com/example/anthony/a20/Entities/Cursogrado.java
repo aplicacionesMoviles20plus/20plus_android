@@ -1,11 +1,18 @@
 package com.example.anthony.a20.Entities;
 
 public class Cursogrado {
-   private int idcursogrado;
-   private String nombre ;
-   private String contenido;
-   private String grado ;
+   private int idcursogrado     ;
+   private String nombre        ;
+   private String contenido         ;
+   private String grado         ;
 
+    public Cursogrado(int idcursogrado, String nombre, String contenido, String grado) {
+        this.idcursogrado = idcursogrado;
+        this.nombre = nombre;
+        this.contenido = contenido;
+        this.grado = grado;
+    }
+    public Cursogrado(){}
     public int getIdcursogrado() {
         return idcursogrado;
     }
