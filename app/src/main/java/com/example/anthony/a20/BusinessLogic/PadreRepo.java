@@ -20,7 +20,7 @@ public class PadreRepo implements IPadreRepo{
 
         try {
             apiUrl =
-                    new URL("http://192.168.1.11:9990/api/padres?email="+email);
+                    new URL("http://192.168.1.7:9990/api/padres?email="+email);
 
             //Crear conexión
             HttpURLConnection myConnection =
@@ -135,7 +135,7 @@ public class PadreRepo implements IPadreRepo{
         boolean result=false;
         try{
             URL apiUrl =
-                    new URL("http://192.168.1.11:9990/api/padres");
+                    new URL("http://192.168.1.7:9990/api/padres");
 
             //crear conexion
             HttpURLConnection myConnection=(HttpURLConnection)apiUrl.openConnection();

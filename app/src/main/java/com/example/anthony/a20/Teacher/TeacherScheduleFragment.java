@@ -21,8 +21,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 
+import com.example.anthony.a20.BusinessLogic.IPadreRepo;
+import com.example.anthony.a20.BusinessLogic.PadreRepo;
 import com.example.anthony.a20.CalendarActivity;
 import com.example.anthony.a20.Entities.Event;
+import com.example.anthony.a20.Entities.Padre;
 import com.example.anthony.a20.Entities.Popup;
 import com.example.anthony.a20.R;
 import com.framgia.library.calendardayview.CalendarDayView;
@@ -134,6 +137,7 @@ public class TeacherScheduleFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(),CalendarActivity.class);
                 startActivity(intent);
+
             }
         });
         dayView = rootView.findViewById(R.id.day_calendar);

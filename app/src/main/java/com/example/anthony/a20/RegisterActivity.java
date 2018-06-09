@@ -54,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText editTextNombres;
     private EditText editTextApellidos;
     private CircleImageView img_profile;
+    private Padre padre;
     protected static final int GALLERY_PICTURE = 1;
     protected static final int CAMERA_REQUEST = 0;
     protected static final int MY_CAMERA_REQUEST_CODE=100;
@@ -61,14 +62,16 @@ public class RegisterActivity extends AppCompatActivity {
     Bitmap bitmap;
     String selectedImagePath;
     StorageReference storageRef ;
+    private Uri downloadUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         //Variables
         mAuth = FirebaseAuth.getInstance();
+        padre= new Padre();
         img_profile = findViewById(R.id.img_profile);
-        Button btn_register = findViewById(R.id.btn_save);
+
         //Funciones click
         img_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,40 +79,24 @@ public class RegisterActivity extends AppCompatActivity {
                 startDialogImage();
             }
         });
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editTextEmail = findViewById(R.id.edt_Correo);
-                editTextPassword= findViewById(R.id.edt_Contraseña);
-                final String email = editTextEmail.getText().toString();
-                final String password = editTextPassword.getText().toString();
-                Log.d("login", "signIn:" + email);
-                createAccount(email,password);
-            }
-        });
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
         Button btn_register = findViewById(R.id.btn_save);
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 editTextEmail = findViewById(R.id.edt_Correo);
-                editTextPassword = findViewById(R.id.edt_Contraseña);
+                editTextPassword= findViewById(R.id.edt_Contraseña);
                 editTextNombres = findViewById(R.id.edt_Nombres);
                 editTextApellidos = findViewById(R.id.edt_Apellidos);
-
                 final String email = editTextEmail.getText().toString();
                 final String password = editTextPassword.getText().toString();
                 final String nombres=editTextNombres.getText().toString();
                 final String apellidos=editTextApellidos.getText().toString();
-                Log.d("login", "signIn:" + email);
-
-
-                Padre padre=new Padre();
                 padre.setCelular(123);
                 padre.setDepartamento("Lima");
                 padre.setDireccion("Calle 666");
@@ -121,10 +108,10 @@ public class RegisterActivity extends AppCompatActivity {
                 padre.setPassword(password);
                 padre.setProvincia("Lima");
                 padre.setApellido(apellidos);
-                PostTask postTask = new PostTask();
-                postTask.execute(padre);
+                createAccount(email,password);
 
-                createAccount(email, password);
+
+
             }
         });
     }
@@ -156,11 +143,13 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
     private void createAccount(final String email, String password) {
+
         Log.d("login", "signIn:" + email);
         //if (!validateForm()) {
         //    return;
         //}
         // [START sign_in_with_email]
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -172,7 +161,7 @@ public class RegisterActivity extends AppCompatActivity {
                             UploadImage(email);
                             Intent intent = new Intent(getApplicationContext(), ChooseProfileActivity.class);
                             startActivity(intent);
-                        } else {
+                            } else {
                             // If sign in fails, display a message to the user.
                             Log.w("d", "signInWithEmail:failure", task.getException());
                             Toast.makeText(RegisterActivity.this, "Authentication failed.",
@@ -311,14 +300,14 @@ public class RegisterActivity extends AppCompatActivity {
     private void UploadImage(String email){
         storageRef= FirebaseStorage.getInstance().getReference();
         Uri file = Uri.fromFile(new File(txt_image_path));
-
+        padre.setFotourl(txt_image_path);
         StorageReference riversRef = storageRef.child("images/"+email+".jpg");
         riversRef.putFile(file)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // Get a URL to the uploaded content
-                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        downloadUrl = taskSnapshot.getDownloadUrl();
                         FirebaseUser user = mAuth.getCurrentUser();
                         //CAMBIAR FOTO
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
@@ -328,7 +317,10 @@ public class RegisterActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-                                            Log.d("EXITO", "User profile updated.");
+                                            Log.d("EXITO", "User profile updated."+downloadUrl);
+                                            padre.setFotourl(downloadUrl.toString());
+                                            PostTask postTask = new PostTask();
+                                            postTask.execute(padre);
                                         }
                                     }
                                 });
@@ -374,9 +366,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     class PostTask extends AsyncTask<Padre,Void,Void> {
-
-
-
         @Override
         protected Void doInBackground(Padre... padres) {
             IPadreRepo padreAPI = new PadreRepo();
