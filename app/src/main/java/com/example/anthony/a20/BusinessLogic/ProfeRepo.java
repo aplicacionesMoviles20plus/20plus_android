@@ -299,4 +299,377 @@ public class ProfeRepo implements IProfeRepo {
         return result;
     }
 
+    @Override
+    public ArrayList<Profesor> getProfesorsNoUser(int iduser) {
+        ArrayList<Profesor> profes=new ArrayList<>();
+        URL apiUrl=null;
+
+        try {
+            apiUrl =
+                    new URL("http://localhost:9990/api/profesors?iduser="+iduser);
+
+            //Crear conexión
+            HttpURLConnection myConnection =
+                    (HttpURLConnection) apiUrl.openConnection();
+
+            //Procesar respuesta
+            if (myConnection.getResponseCode()== 200){
+                //Éxito
+                //Further procesamiento aqui
+
+                //Leyendo la respuesta
+                InputStream responseBody= myConnection.getInputStream();
+
+                //Usando lectura para respuesta
+                InputStreamReader responseBodyReader=
+                        new InputStreamReader(responseBody,"UTF-8");
+
+                //Leyenso jason
+                JsonReader jsonReader=new JsonReader(responseBodyReader);
+
+                //Comenzar lectura del arreglo
+                jsonReader.beginArray();
+
+                //Leyendo elementos
+                while (jsonReader.hasNext()){
+                    //Leer cada objeto
+                    jsonReader.beginObject();
+                    int idprofesor     =0     ;
+                    String nombre        =""   ;
+                    String apellido      =""   ;
+                    String password      =""   ;
+                    String email2        =""    ;
+                    String celular       =""   ;
+                    String descripcion   =""   ;
+                    Double preciomin     =0.0     ;
+                    Double preciomax     =0.0     ;
+                    String  experiencia    ="" ;
+                    long calificacion      =0  ;
+                    long dni               =0  ;
+                    String antecedentes   =""  ;
+                    String fotourl        =""      ;
+                    int id_metodopago     =0 ;
+                    while(jsonReader.hasNext()){
+                        String property=jsonReader.nextName();
+                        switch(property.toLowerCase()){
+                            case "idprofesor":
+                                idprofesor=jsonReader.nextInt();
+                                break;
+                            case "nombre":
+                                nombre=jsonReader.nextString();
+                                break;
+                            case "apellido":
+                                apellido=jsonReader.nextString();
+                                break;
+                            case "password":
+                                password=jsonReader.nextString();
+                                break;
+                            case "email":
+                                email2=jsonReader.nextString();
+                                break;
+                            case "celular":
+                                celular=jsonReader.nextString();
+                                break;
+                            case "descripcion":
+                                descripcion=jsonReader.nextString();
+                                break;
+                            case "preciomin":
+                                preciomin=jsonReader.nextDouble();
+                                break;
+                            case "preciomax":
+                                preciomax=jsonReader.nextDouble();
+                                break;
+                            case "calificacion":
+                                calificacion=jsonReader.nextLong();
+                                break;
+                            case "dni":
+                                dni=jsonReader.nextLong();
+                                break;
+                            case "antecedentes":
+                                antecedentes=jsonReader.nextString();
+                                break;
+                            case "fotourl":
+                                fotourl=jsonReader.nextString();
+                                break;
+                            case "id_metodopago":
+                                id_metodopago=jsonReader.nextInt();
+                                break;
+                            default:
+                                jsonReader.skipValue();
+                                break;
+                        }
+                        //Agregar item a la lista
+
+                    }
+                    Profesor obj=new Profesor( idprofesor,  nombre,  apellido,  password,  email2,  celular,  descripcion,  preciomin,  preciomax,  experiencia,  calificacion,  dni,  antecedentes,  fotourl,  id_metodopago);
+                    profes.add(obj);
+                    jsonReader.endObject();
+                }
+                jsonReader.endArray();
+                jsonReader.close();
+                myConnection.disconnect();
+
+            } else   {
+
+            }
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return profes;
+    }
+
+    @Override
+    public ArrayList<Profesor> getProfesorByZona(int idzona, int iduser) {
+        ArrayList<Profesor> profes=new ArrayList<>();
+        URL apiUrl=null;
+
+        try {
+            apiUrl =
+                    new URL("http://localhost:9990/api/profesors?idzona="+idzona+"&iduser="+iduser);
+
+            //Crear conexión
+            HttpURLConnection myConnection =
+                    (HttpURLConnection) apiUrl.openConnection();
+
+            //Procesar respuesta
+            if (myConnection.getResponseCode()== 200){
+                //Éxito
+                //Further procesamiento aqui
+
+                //Leyendo la respuesta
+                InputStream responseBody= myConnection.getInputStream();
+
+                //Usando lectura para respuesta
+                InputStreamReader responseBodyReader=
+                        new InputStreamReader(responseBody,"UTF-8");
+
+                //Leyenso jason
+                JsonReader jsonReader=new JsonReader(responseBodyReader);
+
+                //Comenzar lectura del arreglo
+                jsonReader.beginArray();
+
+                //Leyendo elementos
+                while (jsonReader.hasNext()){
+                    //Leer cada objeto
+                    jsonReader.beginObject();
+                    int idprofesor     =0     ;
+                    String nombre        =""   ;
+                    String apellido      =""   ;
+                    String password      =""   ;
+                    String email2        =""    ;
+                    String celular       =""   ;
+                    String descripcion   =""   ;
+                    Double preciomin     =0.0     ;
+                    Double preciomax     =0.0     ;
+                    String  experiencia    ="" ;
+                    long calificacion      =0  ;
+                    long dni               =0  ;
+                    String antecedentes   =""  ;
+                    String fotourl        =""      ;
+                    int id_metodopago     =0 ;
+                    while(jsonReader.hasNext()){
+                        String property=jsonReader.nextName();
+                        switch(property.toLowerCase()){
+                            case "idprofesor":
+                                idprofesor=jsonReader.nextInt();
+                                break;
+                            case "nombre":
+                                nombre=jsonReader.nextString();
+                                break;
+                            case "apellido":
+                                apellido=jsonReader.nextString();
+                                break;
+                            case "password":
+                                password=jsonReader.nextString();
+                                break;
+                            case "email":
+                                email2=jsonReader.nextString();
+                                break;
+                            case "celular":
+                                celular=jsonReader.nextString();
+                                break;
+                            case "descripcion":
+                                descripcion=jsonReader.nextString();
+                                break;
+                            case "preciomin":
+                                preciomin=jsonReader.nextDouble();
+                                break;
+                            case "preciomax":
+                                preciomax=jsonReader.nextDouble();
+                                break;
+                            case "calificacion":
+                                calificacion=jsonReader.nextLong();
+                                break;
+                            case "dni":
+                                dni=jsonReader.nextLong();
+                                break;
+                            case "antecedentes":
+                                antecedentes=jsonReader.nextString();
+                                break;
+                            case "fotourl":
+                                fotourl=jsonReader.nextString();
+                                break;
+                            case "id_metodopago":
+                                id_metodopago=jsonReader.nextInt();
+                                break;
+                            default:
+                                jsonReader.skipValue();
+                                break;
+                        }
+                        //Agregar item a la lista
+
+                    }
+                    Profesor obj=new Profesor( idprofesor,  nombre,  apellido,  password,  email2,  celular,  descripcion,  preciomin,  preciomax,  experiencia,  calificacion,  dni,  antecedentes,  fotourl,  id_metodopago);
+                    profes.add(obj);
+                    jsonReader.endObject();
+                }
+                jsonReader.endArray();
+                jsonReader.close();
+                myConnection.disconnect();
+
+            } else   {
+
+            }
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return profes;
+    }
+
+    @Override
+    public ArrayList<Profesor> getProfesorByGrado(int idcurso, int iduser) {
+        ArrayList<Profesor> profes=new ArrayList<>();
+        URL apiUrl=null;
+
+        try {
+            apiUrl =
+                    new URL("http://localhost:9990/api/profesors?idcurso="+idcurso+"&iduser="+iduser);
+
+            //Crear conexión
+            HttpURLConnection myConnection =
+                    (HttpURLConnection) apiUrl.openConnection();
+
+            //Procesar respuesta
+            if (myConnection.getResponseCode()== 200){
+                //Éxito
+                //Further procesamiento aqui
+
+                //Leyendo la respuesta
+                InputStream responseBody= myConnection.getInputStream();
+
+                //Usando lectura para respuesta
+                InputStreamReader responseBodyReader=
+                        new InputStreamReader(responseBody,"UTF-8");
+
+                //Leyenso jason
+                JsonReader jsonReader=new JsonReader(responseBodyReader);
+
+                //Comenzar lectura del arreglo
+                jsonReader.beginArray();
+
+                //Leyendo elementos
+                while (jsonReader.hasNext()){
+                    //Leer cada objeto
+                    jsonReader.beginObject();
+                    int idprofesor     =0     ;
+                    String nombre        =""   ;
+                    String apellido      =""   ;
+                    String password      =""   ;
+                    String email2        =""    ;
+                    String celular       =""   ;
+                    String descripcion   =""   ;
+                    Double preciomin     =0.0     ;
+                    Double preciomax     =0.0     ;
+                    String  experiencia    ="" ;
+                    long calificacion      =0  ;
+                    long dni               =0  ;
+                    String antecedentes   =""  ;
+                    String fotourl        =""      ;
+                    int id_metodopago     =0 ;
+                    while(jsonReader.hasNext()){
+                        String property=jsonReader.nextName();
+                        switch(property.toLowerCase()){
+                            case "idprofesor":
+                                idprofesor=jsonReader.nextInt();
+                                break;
+                            case "nombre":
+                                nombre=jsonReader.nextString();
+                                break;
+                            case "apellido":
+                                apellido=jsonReader.nextString();
+                                break;
+                            case "password":
+                                password=jsonReader.nextString();
+                                break;
+                            case "email":
+                                email2=jsonReader.nextString();
+                                break;
+                            case "celular":
+                                celular=jsonReader.nextString();
+                                break;
+                            case "descripcion":
+                                descripcion=jsonReader.nextString();
+                                break;
+                            case "preciomin":
+                                preciomin=jsonReader.nextDouble();
+                                break;
+                            case "preciomax":
+                                preciomax=jsonReader.nextDouble();
+                                break;
+                            case "calificacion":
+                                calificacion=jsonReader.nextLong();
+                                break;
+                            case "dni":
+                                dni=jsonReader.nextLong();
+                                break;
+                            case "antecedentes":
+                                antecedentes=jsonReader.nextString();
+                                break;
+                            case "fotourl":
+                                fotourl=jsonReader.nextString();
+                                break;
+                            case "id_metodopago":
+                                id_metodopago=jsonReader.nextInt();
+                                break;
+                            default:
+                                jsonReader.skipValue();
+                                break;
+                        }
+                        //Agregar item a la lista
+
+                    }
+                    Profesor obj=new Profesor( idprofesor,  nombre,  apellido,  password,  email2,  celular,  descripcion,  preciomin,  preciomax,  experiencia,  calificacion,  dni,  antecedentes,  fotourl,  id_metodopago);
+                    profes.add(obj);
+                    jsonReader.endObject();
+                }
+                jsonReader.endArray();
+                jsonReader.close();
+                myConnection.disconnect();
+
+            } else   {
+
+            }
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return profes;
+    }
+
+
 }

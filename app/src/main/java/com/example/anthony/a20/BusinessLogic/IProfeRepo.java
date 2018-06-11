@@ -8,4 +8,7 @@ public interface IProfeRepo {
     Profesor getProfesor(String email);
     ArrayList<Profesor> getProfesors();
     boolean createProfesor(Profesor obj);
+    ArrayList<Profesor> getProfesorsNoUser(int iduser);
+    ArrayList<Profesor> getProfesorByZona(int idzona,int iduser);
+    ArrayList<Profesor> getProfesorByGrado(int idcurso,int iduser);
 }
