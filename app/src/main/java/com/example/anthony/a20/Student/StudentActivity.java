@@ -24,7 +24,7 @@ public class StudentActivity extends FragmentActivity implements CVTeacherFragme
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     fragment=new ListTeacherFragment();break;
-                case R.id.navigation_notifications:
+                case R.id.navigation_profile:
                     fragment=new StudentProfileFragment();break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
