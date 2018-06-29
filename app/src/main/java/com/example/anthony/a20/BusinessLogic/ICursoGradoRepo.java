@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface ICursoGradoRepo {
     ArrayList<Cursogrado> getCursoGradoes();
+    ArrayList<Cursogrado> getCursosDelProfe(int idprofe);
 }

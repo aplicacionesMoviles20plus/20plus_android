@@ -7,4 +7,7 @@ import java.util.ArrayList;
 
 public interface IHorarioRepo {
     ArrayList<Horario> getHorarios();
+    ArrayList<Horario> getHorariosDelProfe(int idprofe);
+    ArrayList<Horario> getHorariosDelProfe2(int idprofe,String estado);
+
 }

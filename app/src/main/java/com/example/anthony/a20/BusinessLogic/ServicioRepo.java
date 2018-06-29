@@ -2,8 +2,8 @@ package com.example.anthony.a20.BusinessLogic;
 
 import android.util.JsonReader;
 
-import com.example.anthony.a20.Entities.Mensaje;
-import com.example.anthony.a20.Entities.MetodoPago;
+import com.example.anthony.a20.Entities.Servicio;
+import com.example.anthony.a20.Entities.Zona;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,14 +14,13 @@ import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
 
-public class MetodoPagoRepo implements IMetodoPagoRepo
-{
+public class ServicioRepo implements IServicioRepo {
     @Override
-    public boolean createMetodoPago(MetodoPago obj) {
+    public boolean createServicio(Servicio obj) {
         boolean result=false;
         try{
             URL apiUrl =
-                    new URL("http://vmdev1.nexolink.com:90/TeachersAPI/api/metodopagoes");
+                    new URL("http://vmdev1.nexolink.com:90/TeachersAPI/api/servicios");
 
             //crear conexion
             HttpURLConnection myConnection=(HttpURLConnection)apiUrl.openConnection();
@@ -54,13 +53,13 @@ public class MetodoPagoRepo implements IMetodoPagoRepo
     }
 
     @Override
-    public MetodoPago getMetodoPago(int id) {
-        ArrayList<MetodoPago> mensajes=new ArrayList<>();
+    public Servicio getServicio(int id) {
+        ArrayList<Servicio> zonas=new ArrayList<>();
         URL apiUrl=null;
 
         try {
             apiUrl =
-                    new URL("http://vmdev1.nexolink.com:90/TeachersAPI/api/metodopagoes?id="+id);
+                    new URL("http://vmdev1.nexolink.com:90/TeachersAPI/api/servicios?id="+id);
 
             //Crear conexión
             HttpURLConnection myConnection =
@@ -88,32 +87,22 @@ public class MetodoPagoRepo implements IMetodoPagoRepo
                 while (jsonReader.hasNext()){
                     //Leer cada objeto
                     jsonReader.beginObject();
-                    int id2 =0;
-                    String nombre ="";
-                    String numero="";
-                    Date fecha =null;
-                    String ccv ="";
-
+                    int idservicio=0;
+                    Date fecha=null ;
+                    String tipodepago="";
 
                     while(jsonReader.hasNext()){
                         String property=jsonReader.nextName();
                         switch(property.toLowerCase()){
-                            case "id":
-                                id2=jsonReader.nextInt();
-                                break;
-                            case "nombre":
-                                nombre=jsonReader.nextString();
-                                break;
-                            case "numerotarjeta":
-                                numero=jsonReader.nextString();
+                            case "idservicio":
+                                idservicio=jsonReader.nextInt();
                                 break;
                             case "fecha":
                                 fecha=Date.valueOf(jsonReader.nextString());
                                 break;
-                            case "cvv":
-                                ccv=jsonReader.nextString();
+                            case "tipodepago":
+                                tipodepago=jsonReader.nextString();
                                 break;
-
                             default:
                                 jsonReader.skipValue();
                                 break;
@@ -121,8 +110,8 @@ public class MetodoPagoRepo implements IMetodoPagoRepo
                         //Agregar item a la lista
 
                     }
-                    MetodoPago obj=new MetodoPago( id2,nombre,numero,fecha,ccv);
-                    mensajes.add(obj);
+                    Servicio obj=new Servicio( idservicio,fecha,tipodepago);
+                    zonas.add(obj);
                     jsonReader.endObject();
                 }
                 jsonReader.endArray();
@@ -140,6 +129,6 @@ public class MetodoPagoRepo implements IMetodoPagoRepo
             e.printStackTrace();
         }
 
-        return mensajes.get(0) ;
+        return zonas.get(0);
     }
 }

@@ -6,6 +6,6 @@ import java.util.ArrayList;
 
 public interface IMensajeRepo {
     Mensaje getMensaje(int id);
-    ArrayList<Mensaje> getMensajes();
+    ArrayList<Mensaje> getMensajes(int idpadre,int idprofe);
     boolean createMensaje(Mensaje obj);
 }

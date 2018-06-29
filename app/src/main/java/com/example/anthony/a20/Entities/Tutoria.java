@@ -10,7 +10,7 @@ public class Tutoria {
    private int idtutoria;
    private Date hora ;
    private Date fecha ;
-   private Float   precio;
+   private Double   precio;
    private String comentario;
    private int calificacion ;
    private int id_padre;
@@ -19,6 +19,21 @@ public class Tutoria {
    private int id_horario;
    private int id_servicio;
    private int numerohoras;
+
+    public Tutoria(int idtutoria, Date hora, Date fecha, Double precio, String comentario, int calificacion, int id_padre, String estado, String curso, int id_horario, int id_servicio, int numerohoras) {
+        this.idtutoria = idtutoria;
+        this.hora = hora;
+        this.fecha = fecha;
+        this.precio = precio;
+        this.comentario = comentario;
+        this.calificacion = calificacion;
+        this.id_padre = id_padre;
+        this.estado = estado;
+        this.curso = curso;
+        this.id_horario = id_horario;
+        this.id_servicio = id_servicio;
+        this.numerohoras = numerohoras;
+    }
 
     public String toJson(){
         String jsonText = null;
@@ -68,11 +83,11 @@ public class Tutoria {
         this.fecha = fecha;
     }
 
-    public Float getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Float precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
