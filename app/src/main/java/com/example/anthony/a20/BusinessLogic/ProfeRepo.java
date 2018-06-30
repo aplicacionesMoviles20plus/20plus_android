@@ -1045,7 +1045,7 @@ public class ProfeRepo implements IProfeRepo {
 
     @Override
     public Profesor getProfesor2(int id) {
-        ArrayList<Profesor> profes=new ArrayList<>();
+        Profesor profe=new Profesor();
         URL apiUrl=null;
 
         try {
@@ -1071,13 +1071,9 @@ public class ProfeRepo implements IProfeRepo {
                 //Leyenso jason
                 JsonReader jsonReader=new JsonReader(responseBodyReader);
 
-                //Comenzar lectura del arreglo
-                jsonReader.beginArray();
 
-                //Leyendo elementos
-                while (jsonReader.hasNext()){
                     //Leer cada objeto
-                    jsonReader.beginObject();
+                jsonReader.beginObject();
                     int idprofesor     =0     ;
                     String nombre        =""   ;
                     String apellido      =""   ;
@@ -1093,7 +1089,9 @@ public class ProfeRepo implements IProfeRepo {
                     String antecedentes   =""  ;
                     String fotourl        =""      ;
                     int id_metodopago     =0 ;
-                    while(jsonReader.hasNext()){
+                    int x=0;
+                    while(x<15){
+                        x++;
                         String property=jsonReader.nextName();
                         switch(property.toLowerCase()){
                             case "idprofesor":
@@ -1143,13 +1141,9 @@ public class ProfeRepo implements IProfeRepo {
                                 break;
                         }
                         //Agregar item a la lista
-
-                    }
-                    Profesor obj=new Profesor( idprofesor,  nombre,  apellido,  password,  email2,  celular,  descripcion,  preciomin,  preciomax,  experiencia,  calificacion,  dni,  antecedentes,  fotourl,  id_metodopago);
-                    profes.add(obj);
-                    jsonReader.endObject();
                 }
-                jsonReader.endArray();
+                profe=new Profesor( idprofesor,  nombre,  apellido,  password,  email2,  celular,  descripcion,  preciomin,  preciomax,  experiencia,  calificacion,  dni,  antecedentes,  fotourl,  id_metodopago);
+                jsonReader.endObject();
                 jsonReader.close();
                 myConnection.disconnect();
 
@@ -1164,7 +1158,7 @@ public class ProfeRepo implements IProfeRepo {
             e.printStackTrace();
         }
 
-        return profes.get(0) ;
+        return profe;
     }
 
 

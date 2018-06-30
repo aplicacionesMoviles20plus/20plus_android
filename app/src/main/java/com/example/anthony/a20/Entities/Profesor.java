@@ -181,7 +181,11 @@ public class Profesor {
         this.fotourl = fotourl;
     }
 
+    public Profesor() {
+    }
+
     public int getId_metodopago() {
+
         return id_metodopago;
     }
 
