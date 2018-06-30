@@ -15,7 +15,7 @@ import com.example.anthony.a20.Entities.Tutoria;
 import com.example.anthony.a20.R;
 
 public class StudentActivity extends AppCompatActivity implements CVTeacherFragment.OnFragmentInteractionListener, StudentProfileFragment.OnFragmentInteractionListener  ,ProfesorHomeFragment.OnListFragmentInteractionListener
-,MyTutoriaFragment.OnListFragmentInteractionListener{
+,MyTutoriaFragment.OnListFragmentInteractionListener,ProfesorFavoritoFragment.OnListFragmentInteractionListener{
 
     private TextView mTextMessage;
 
@@ -34,6 +34,7 @@ public class StudentActivity extends AppCompatActivity implements CVTeacherFragm
                     fragment=new MyTutoriaFragment();break;
 
                 case R.id.navigation_favoritos:
+                    fragment=new ProfesorFavoritoFragment();
                     break;
                 case R.id.navigation_mensajes:
                     break;

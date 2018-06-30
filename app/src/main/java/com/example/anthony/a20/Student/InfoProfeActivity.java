@@ -25,10 +25,7 @@ public class InfoProfeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_profe);
-
-
     }
-
     @Override
     protected void onStart() {
         super.onStart();
