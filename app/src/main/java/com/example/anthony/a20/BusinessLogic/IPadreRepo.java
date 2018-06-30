@@ -7,5 +7,6 @@ import java.util.ArrayList;
 public interface IPadreRepo {
     Padre getPadre(String email);
     boolean createPadre(Padre obj);
+    ArrayList<Padre> getPadresDeMensaje(int idprofe);
 
 }

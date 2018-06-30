@@ -4,7 +4,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Profesor {
-     private int idprofesor          ;
+    private static final int NO_IMAGE_PROVIDED = -1;
+    private int idprofesor          ;
      private String nombre           ;
      private String apellido         ;
      private String password         ;
@@ -19,6 +20,7 @@ public class Profesor {
      private String antecedentes     ;
      private String fotourl              ;
      private int id_metodopago      ;
+     private int mProfileImage= NO_IMAGE_PROVIDED;
 
     public Profesor(int idprofesor, String nombre, String apellido, String password, String email, String celular, String descripcion, Double preciomin, Double preciomax, String experiencia, long calificacion, long dni, String antecedentes, String fotourl, int id_metodopago) {
         this.idprofesor = idprofesor;
@@ -181,11 +183,23 @@ public class Profesor {
         this.fotourl = fotourl;
     }
 
+    public Profesor() {
+    }
+
     public int getId_metodopago() {
+
         return id_metodopago;
     }
 
     public void setId_metodopago(int id_metodopago) {
         this.id_metodopago = id_metodopago;
+    }
+
+    public int getmProfileImage() {
+        return mProfileImage;
+    }
+
+    public void setmProfileImage(int mProfileImage) {
+        this.mProfileImage = mProfileImage;
     }
 }

@@ -13,7 +13,7 @@ public class ProfeZonaRepo implements IProfeZonaRepo {
         boolean result=false;
         try{
             URL apiUrl =
-                    new URL("http://localhost:9990/api/profesor_zona");
+                    new URL("http://vmdev1.nexolink.com:90/TeachersAPI/api/profesor_zona");
 
             //crear conexion
             HttpURLConnection myConnection=(HttpURLConnection)apiUrl.openConnection();

@@ -14,7 +14,7 @@ public class ProfeHorarioRepo implements  IProfeHorarioRepo{
         boolean result=false;
         try{
             URL apiUrl =
-                    new URL("http://localhost:9990/api/profesor_horario");
+                    new URL("http://vmdev1.nexolink.com:90/TeachersAPI/api/profesor_horario");
 
             //crear conexion
             HttpURLConnection myConnection=(HttpURLConnection)apiUrl.openConnection();

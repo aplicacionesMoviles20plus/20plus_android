@@ -13,7 +13,7 @@ public class ProfeCursoGradoRepo implements IProfeCursoGradoRepo{
         boolean result=false;
         try{
             URL apiUrl =
-                    new URL("http://localhost:9990/api/profesor_cursogrado");
+                    new URL("http://vmdev1.nexolink.com:90/TeachersAPI/api/profesor_cursogrado");
 
             //crear conexion
             HttpURLConnection myConnection=(HttpURLConnection)apiUrl.openConnection();

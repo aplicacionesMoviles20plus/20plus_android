@@ -7,4 +7,5 @@ import java.util.ArrayList;
 
 public interface IZonaRepo {
     ArrayList<Zona> getZonaes();
+    ArrayList<Zona> getZonasDelProfe(int idprofe);
 }

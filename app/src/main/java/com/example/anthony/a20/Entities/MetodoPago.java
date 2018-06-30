@@ -12,6 +12,14 @@ public class MetodoPago {
     private Date fecha ;
     private String cvv ;
 
+    public MetodoPago(int id, String nombre, String numerotarjeta, Date fecha, String cvv) {
+        this.id = id;
+        this.nombre = nombre;
+        this.numerotarjeta = numerotarjeta;
+        this.fecha = fecha;
+        this.cvv = cvv;
+    }
+
     public String toJson(){
         String jsonText = null;
 

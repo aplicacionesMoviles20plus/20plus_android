@@ -10,6 +10,12 @@ public class Servicio {
    private Date fecha ;
    private String tipodepago ;
 
+    public Servicio(int idservicio, Date fecha, String tipodepago) {
+        this.idservicio = idservicio;
+        this.fecha = fecha;
+        this.tipodepago = tipodepago;
+    }
+
     public String toJson(){
         String jsonText = null;
 

@@ -11,6 +11,13 @@ public class Suscripcion {
    private Date fechafin ;
     private int id_profesor ;
 
+    public Suscripcion(int idsuscripcion, Date fechainicio, Date fechafin, int id_profesor) {
+        this.idsuscripcion = idsuscripcion;
+        this.fechainicio = fechainicio;
+        this.fechafin = fechafin;
+        this.id_profesor = id_profesor;
+    }
+
     public String toJson(){
         String jsonText = null;
 

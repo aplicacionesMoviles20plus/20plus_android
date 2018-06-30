@@ -12,7 +12,15 @@ public class ResumenClase {
     private Date fecha;
     private int  id_tutoria;
 
+    public ResumenClase(int idresumen, String descripcion, Date fecha, int id_tutoria) {
+        this.idresumen = idresumen;
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+        this.id_tutoria = id_tutoria;
+    }
+
     public String toJson(){
+
         String jsonText = null;
 
         JSONObject jsonObject = new JSONObject();

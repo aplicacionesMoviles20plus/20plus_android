@@ -14,7 +14,7 @@ public class ProfeFavoritoRepo implements IProfeFavoritoRepo {
         boolean result=false;
         try{
             URL apiUrl =
-                    new URL("http://localhost:9990/api/profesorfavoritoes");
+                    new URL("http://vmdev1.nexolink.com:90/TeachersAPI/api/profesorfavoritoes");
 
             //crear conexion
             HttpURLConnection myConnection=(HttpURLConnection)apiUrl.openConnection();
