@@ -11,7 +11,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class TutoriaRepo implements ITutoriaRepo {
@@ -107,10 +109,16 @@ public class TutoriaRepo implements ITutoriaRepo {
                                 idtutoria=jsonReader.nextInt();
                                 break;
                             case "hora":
-                                hora=Date.valueOf(jsonReader.nextString());
+                                SimpleDateFormat sf = new SimpleDateFormat("HH:mm:ss");
+                                String prueba=jsonReader.nextString();
+                                Date date =  sf.parse(prueba);
+                                hora=date;
                                 break;
                             case "fecha":
-                                fecha=Date.valueOf(jsonReader.nextString());
+                                SimpleDateFormat sd = new SimpleDateFormat("yyyy-mm-dd'T'HH:mm:ss");
+                                String prueba2=jsonReader.nextString();
+                                Date date2 =  sd.parse(prueba2);
+                                fecha=date2;
                                 break;
                             case "precio":
                                 precio=jsonReader.nextDouble();
@@ -162,6 +170,8 @@ public class TutoriaRepo implements ITutoriaRepo {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -223,10 +233,16 @@ public class TutoriaRepo implements ITutoriaRepo {
                                 idtutoria=jsonReader.nextInt();
                                 break;
                             case "hora":
-                                hora=Date.valueOf(jsonReader.nextString());
+                                SimpleDateFormat sf = new SimpleDateFormat("HH:mm:ss");
+                                String prueba=jsonReader.nextString();
+                                Date date =  sf.parse(prueba);
+                                hora=date;
                                 break;
                             case "fecha":
-                                fecha=Date.valueOf(jsonReader.nextString());
+                                SimpleDateFormat sd = new SimpleDateFormat("yyyy-mm-dd'T'HH:mm:ss");
+                                String prueba2=jsonReader.nextString();
+                                Date date2 =  sd.parse(prueba2);
+                                fecha=date2;
                                 break;
                             case "precio":
                                 precio=jsonReader.nextDouble();
@@ -278,6 +294,8 @@ public class TutoriaRepo implements ITutoriaRepo {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 

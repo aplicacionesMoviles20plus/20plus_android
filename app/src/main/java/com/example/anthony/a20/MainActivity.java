@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -39,10 +40,11 @@ public class MainActivity extends AppCompatActivity {
     public Padre padreLoguin=new Padre();
     public String email2="";
     UsuarioTask tarea=new UsuarioTask();
-
+    SharedPreferences mPrefs ;
     @Override
     protected void onStart() {
         super.onStart();
+        mPrefs = getPreferences(MODE_PRIVATE);
         //Si esta iniciada la sesion
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
@@ -145,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Padre padre) {
             super.onPostExecute(padre);
-            SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+
             SharedPreferences.Editor prefsEditor = mPrefs.edit();
             Gson gson = new Gson();
             String json = gson.toJson(padreLoguin);

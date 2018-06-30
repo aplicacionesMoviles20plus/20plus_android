@@ -11,9 +11,11 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.anthony.a20.Entities.Profesor;
+import com.example.anthony.a20.Entities.Tutoria;
 import com.example.anthony.a20.R;
 
-public class StudentActivity extends AppCompatActivity implements CVTeacherFragment.OnFragmentInteractionListener, StudentProfileFragment.OnFragmentInteractionListener  ,ProfesorHomeFragment.OnListFragmentInteractionListener{
+public class StudentActivity extends AppCompatActivity implements CVTeacherFragment.OnFragmentInteractionListener, StudentProfileFragment.OnFragmentInteractionListener  ,ProfesorHomeFragment.OnListFragmentInteractionListener
+,MyTutoriaFragment.OnListFragmentInteractionListener{
 
     private TextView mTextMessage;
 
@@ -29,7 +31,8 @@ public class StudentActivity extends AppCompatActivity implements CVTeacherFragm
                 case R.id.navigation_home:
                     fragment=new ProfesorHomeFragment();break;
                 case R.id.navigation_tutorias:
-                    break;
+                    fragment=new MyTutoriaFragment();break;
+
                 case R.id.navigation_favoritos:
                     break;
                 case R.id.navigation_mensajes:
@@ -62,6 +65,11 @@ public class StudentActivity extends AppCompatActivity implements CVTeacherFragm
 
     @Override
     public void onListFragmentInteraction(Profesor item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Tutoria item) {
 
     }
 }

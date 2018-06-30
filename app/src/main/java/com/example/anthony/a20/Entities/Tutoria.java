@@ -3,7 +3,7 @@ package com.example.anthony.a20.Entities;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Calendar;
 
 public class Tutoria {

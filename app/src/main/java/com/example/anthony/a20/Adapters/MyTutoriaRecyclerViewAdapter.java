@@ -6,26 +6,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.anthony.a20.Entities.Profesor;
 import com.example.anthony.a20.Entities.Tutoria;
 import com.example.anthony.a20.R;
-import com.example.anthony.a20.Student.ProfesorHomeFragment.OnListFragmentInteractionListener;
+import com.example.anthony.a20.Student.MyTutoriaFragment.OnListFragmentInteractionListener;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link Profesor} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
-public class MyProfesorRecyclerViewAdapter extends RecyclerView.Adapter<MyProfesorRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Profesor> mValues;
+public class MyTutoriaRecyclerViewAdapter extends RecyclerView.Adapter<MyTutoriaRecyclerViewAdapter.ViewHolder> {
+
+    private final List<Tutoria> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyProfesorRecyclerViewAdapter(ArrayList<Profesor> items, OnListFragmentInteractionListener listener) {
+    public MyTutoriaRecyclerViewAdapter(List<Tutoria> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -33,15 +27,15 @@ public class MyProfesorRecyclerViewAdapter extends RecyclerView.Adapter<MyProfes
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_profesor, parent, false);
+                .inflate(R.layout.fragment_tutoria, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getNombre());
-        holder.mContentView.setText(mValues.get(position).getApellido());
+        holder.mIdView.setText(mValues.get(position).getCurso());
+        holder.mContentView.setText(mValues.get(position).getEstado());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +58,7 @@ public class MyProfesorRecyclerViewAdapter extends RecyclerView.Adapter<MyProfes
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public Profesor mItem;
+        public Tutoria mItem;
 
         public ViewHolder(View view) {
             super(view);
