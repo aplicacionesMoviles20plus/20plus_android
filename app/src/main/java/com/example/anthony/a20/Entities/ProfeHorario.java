@@ -3,7 +3,8 @@ package com.example.anthony.a20.Entities;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 public class ProfeHorario {
    private int id;
@@ -12,7 +13,15 @@ public class ProfeHorario {
    private String estado ;
    private Date fecha ;
 
-   public String toJson(){
+    public ProfeHorario(int id, int id_profesor, int id_horario, String estado, Date fecha) {
+        this.id = id;
+        this.id_profesor = id_profesor;
+        this.id_horario = id_horario;
+        this.estado = estado;
+        this.fecha = fecha;
+    }
+
+    public String toJson(){
         String jsonText = null;
 
         JSONObject jsonObject = new JSONObject();

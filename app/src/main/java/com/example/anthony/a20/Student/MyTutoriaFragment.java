@@ -48,7 +48,7 @@ public class MyTutoriaFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     ArrayList<Tutoria> tutorias=new ArrayList<Tutoria>();
 
-     //   SharedPreferences mPrefs ;
+     SharedPreferences mPrefs ;
     TutoriasTask tareas=new TutoriasTask();
     int userLoguin=0;
     /**
@@ -61,7 +61,7 @@ public class MyTutoriaFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-      //  mPrefs= this.getActivity().getPreferences(MainActivity.MODE_PRIVATE);
+    // mPrefs= this.getActivity().getApplicationContext().getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
     }
 
     // TODO: Customize parameter initialization
@@ -86,6 +86,9 @@ public class MyTutoriaFragment extends Fragment {
       //  String json = mPrefs.getString("UserLoguin", "");
       //  Padre obj = gson.fromJson(json, Padre.class);
       // userLoguin=obj.getIdpadre();
+
+          //int idName = mPrefs.getInt("userId", 0); //0 is the default value.
+
         userLoguin=6;
     }
 

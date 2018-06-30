@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        mPrefs = getPreferences(MODE_PRIVATE);
+        Context context = getApplicationContext();
+        mPrefs = context.getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
         //Si esta iniciada la sesion
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
@@ -148,11 +149,8 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Padre padre) {
             super.onPostExecute(padre);
 
-            SharedPreferences.Editor prefsEditor = mPrefs.edit();
-            Gson gson = new Gson();
-            String json = gson.toJson(padreLoguin);
-            prefsEditor.putString("UserLoguin", json);
-            prefsEditor.commit();
+            SharedPreferences.Editor editor = mPrefs.edit();
+            editor.putInt("userId", padreLoguin.getIdpadre());
             Intent intent = new Intent(getApplicationContext(), ChooseProfileActivity.class);
             startActivity(intent);
         }

@@ -1,5 +1,6 @@
 package com.example.anthony.a20.Student;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,16 +11,21 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.anthony.a20.Adapters.CourseAdapter;
+
 import com.example.anthony.a20.BusinessLogic.CursoGradoRepo;
 import com.example.anthony.a20.BusinessLogic.ICursoGradoRepo;
 import com.example.anthony.a20.BusinessLogic.IProfeRepo;
+import com.example.anthony.a20.BusinessLogic.IZonaRepo;
 import com.example.anthony.a20.BusinessLogic.ProfeRepo;
+import com.example.anthony.a20.BusinessLogic.ZonaRepo;
 import com.example.anthony.a20.Entities.Cursogrado;
 import com.example.anthony.a20.Entities.Profesor;
+import com.example.anthony.a20.Entities.Zona;
 import com.example.anthony.a20.R;
 
 import java.util.ArrayList;
@@ -29,10 +35,12 @@ public class InfoProfeActivity extends AppCompatActivity {
     TextView nombres;
     TextView descripcion;
     TextView experiencia;
-    TextView cursos;
-    TextView zonas;
+    TextView cursos2;
+    TextView zonas2;
+    Button boton;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    int idprofeenconsulta=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,20 +52,26 @@ public class InfoProfeActivity extends AppCompatActivity {
         nombres        = findViewById(R.id.item_nombre_apellidos);
         descripcion     = findViewById(R.id.item_profe_descripcion);
         experiencia     = findViewById(R.id.item_profe_exp);
-        zonas       = findViewById(R.id.item_profe_zonas);
-        recyclerView = (RecyclerView) findViewById(R.id.item_profe_cursos);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        ICursoGradoRepo repo = new CursoGradoRepo();
-        Bundle bundle = getIntent().getExtras();
-        int id = bundle.getInt("idProfesorInfo");
-        Log.d("ID", String.valueOf(id));
-        ArrayList<Cursogrado>list= repo.getCursosDelProfe(id);
-        Log.d("list",list.get(0).getGrado());
-        CourseAdapter adapter = new CourseAdapter(list);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(layoutManager);
-        new GetTask().execute();
+        cursos2= findViewById(R.id.item_profe_cursos);
+        zonas2       = findViewById(R.id.item_profe_zonas);
+        boton= findViewById(R.id.button_solicitar_tutoria);
+
+        new GetTaskDatos().execute();
+        new GetTaskCursos().execute();
+        new GetTaskZonas().execute();
+
+        boton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), SolicitarTutoriaActivity.class);
+                Bundle bundle = getIntent().getExtras();
+                int idprofeenconsulta = bundle.getInt("idProfesorInfo");
+                bundle.putInt("idProfesorInfo2",idprofeenconsulta);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 
     public void fillSpinner(Profesor profesor) {
@@ -65,8 +79,33 @@ public class InfoProfeActivity extends AppCompatActivity {
         descripcion.setText(String.valueOf(profesor.getDescripcion()));
         experiencia.setText(String.valueOf(profesor.getExperiencia()));
     }
-
-    class GetTask extends AsyncTask<String,Profesor,Profesor> {
+    public void fillSpinner2(ArrayList<Cursogrado> cursos) {
+        String letra="";
+        for(Cursogrado c: cursos)
+        {
+            if(letra.equals("")) {
+                letra = letra + c.getNombre();
+            }
+            else{
+                letra=letra + " , " + c.getNombre();
+            }
+        }
+        cursos2.setText(letra);
+    }
+    public void fillSpinner3(ArrayList<Zona> zonas) {
+        String letra="";
+        for(Zona c: zonas)
+        {
+            if(letra.equals("")) {
+                letra = letra + c.getZona1();
+            }
+            else{
+                letra=letra + " , " + c.getZona1();
+            }
+        }
+        zonas2.setText(letra);
+    }
+    class GetTaskDatos extends AsyncTask<String,Profesor,Profesor> {
 
         @Override
         protected Profesor doInBackground(String... strings) {
@@ -74,14 +113,49 @@ public class InfoProfeActivity extends AppCompatActivity {
             int id = bundle.getInt("idProfesorInfo");
             IProfeRepo repo = new ProfeRepo();
             Profesor profe= repo.getProfesor2(id);
-
-            return profe;
+             return profe;
         }
 
         @Override
         protected void onPostExecute(Profesor profesor) {
             super.onPostExecute(profesor);
             fillSpinner(profesor);
+        }
+
+    }
+    class GetTaskCursos extends AsyncTask<String,ArrayList<Cursogrado>,ArrayList<Cursogrado>> {
+
+        @Override
+        protected ArrayList<Cursogrado> doInBackground(String... strings) {
+            Bundle bundle = getIntent().getExtras();
+            int id = bundle.getInt("idProfesorInfo");
+            ICursoGradoRepo repo = new CursoGradoRepo();
+            ArrayList<Cursogrado> profe= repo.getCursosDelProfe(id);
+            return profe;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Cursogrado> profesor) {
+            super.onPostExecute(profesor);
+            fillSpinner2(profesor);
+        }
+
+    }
+    class GetTaskZonas extends AsyncTask<String,ArrayList<Zona>,ArrayList<Zona>> {
+
+        @Override
+        protected ArrayList<Zona> doInBackground(String... strings) {
+            Bundle bundle = getIntent().getExtras();
+            int id = bundle.getInt("idProfesorInfo");
+            IZonaRepo repo = new ZonaRepo();
+            ArrayList<Zona> profe= repo.getZonasDelProfe(id);
+            return profe;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Zona> profesor) {
+            super.onPostExecute(profesor);
+            fillSpinner3(profesor);
         }
 
     }

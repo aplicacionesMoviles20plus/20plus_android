@@ -77,7 +77,8 @@
         <activity
             android:name=".Student.InfoProfeActivity"
             android:label="@string/title_activity_info_profe"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Student.SolicitarTutoriaActivity"></activity>
     </application>
 
 </manifest>

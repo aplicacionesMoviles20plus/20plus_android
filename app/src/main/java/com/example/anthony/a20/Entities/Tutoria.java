@@ -19,7 +19,7 @@ public class Tutoria {
    private int id_horario;
    private int id_servicio;
    private int numerohoras;
-
+    public Tutoria(){}
     public Tutoria(int idtutoria, Date hora, Date fecha, Double precio, String comentario, int calificacion, int id_padre, String estado, String curso, int id_horario, int id_servicio, int numerohoras) {
         this.idtutoria = idtutoria;
         this.hora = hora;

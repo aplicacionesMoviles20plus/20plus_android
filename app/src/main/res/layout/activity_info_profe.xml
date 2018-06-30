@@ -15,7 +15,7 @@
             android:padding="15dp"
             android:textAlignment="center"
             android:id="@+id/item_details_name"
-            android:textSize="@dimen/regular_text_size"
+            android:textSize="28dp"
             android:text="Informacion del profesor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -74,6 +74,12 @@
             android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <Button
 
+            android:id="@+id/button_solicitar_tutoria"
+            android:layout_margin="50dp"
+            android:text="SOLICITAR CLASE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
