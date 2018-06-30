@@ -13,18 +13,25 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 
 import com.example.anthony.a20.BusinessLogic.CursoGradoRepo;
 import com.example.anthony.a20.BusinessLogic.ICursoGradoRepo;
+import com.example.anthony.a20.BusinessLogic.IProfeFavoritoRepo;
 import com.example.anthony.a20.BusinessLogic.IProfeRepo;
+import com.example.anthony.a20.BusinessLogic.ITutoriaRepo;
 import com.example.anthony.a20.BusinessLogic.IZonaRepo;
+import com.example.anthony.a20.BusinessLogic.ProfeFavoritoRepo;
 import com.example.anthony.a20.BusinessLogic.ProfeRepo;
+import com.example.anthony.a20.BusinessLogic.TutoriaRepo;
 import com.example.anthony.a20.BusinessLogic.ZonaRepo;
 import com.example.anthony.a20.Entities.Cursogrado;
+import com.example.anthony.a20.Entities.ProfeFavorito;
 import com.example.anthony.a20.Entities.Profesor;
+import com.example.anthony.a20.Entities.Tutoria;
 import com.example.anthony.a20.Entities.Zona;
 import com.example.anthony.a20.R;
 
@@ -37,6 +44,7 @@ public class InfoProfeActivity extends AppCompatActivity {
     TextView experiencia;
     TextView cursos2;
     TextView zonas2;
+    ImageView imagen;
     Button boton;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -55,7 +63,7 @@ public class InfoProfeActivity extends AppCompatActivity {
         cursos2= findViewById(R.id.item_profe_cursos);
         zonas2       = findViewById(R.id.item_profe_zonas);
         boton= findViewById(R.id.button_solicitar_tutoria);
-
+    imagen=findViewById((R.id.imagen_favorito));
         new GetTaskDatos().execute();
         new GetTaskCursos().execute();
         new GetTaskZonas().execute();
@@ -72,6 +80,29 @@ public class InfoProfeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        imagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int contador=0;
+                if(contador==0) {
+                    Bundle bundle = getIntent().getExtras();
+                    int idprofeenconsulta = bundle.getInt("idProfesorInfo");
+                    int idpadre=6;
+                    ProfeFavorito aux=new ProfeFavorito();
+                    aux.setId_padre(idpadre);
+                    aux.setId_profesor(idprofeenconsulta);
+                    PostTaskFavorito tareasDeFavorito = new PostTaskFavorito();
+                    tareasDeFavorito.execute(aux);
+                    imagen.setImageResource(R.drawable.ic_favorite_black_24dp);
+                    contador++;
+                }
+               else {
+                    imagen.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                    contador=0;
+                }
+            }
+        });
+
     }
 
     public void fillSpinner(Profesor profesor) {
@@ -158,5 +189,20 @@ public class InfoProfeActivity extends AppCompatActivity {
             fillSpinner3(profesor);
         }
 
+    }
+
+    class PostTaskFavorito extends AsyncTask<ProfeFavorito,Void,Void> {
+        @Override
+        protected Void doInBackground(ProfeFavorito... tutorias) {
+            IProfeFavoritoRepo padreAPI = new ProfeFavoritoRepo();
+            padreAPI.createProfeFavorito(tutorias[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //Toast.makeText(getContext(),"EXITO",Toast.LENGTH_LONG);
+        }
     }
 }
