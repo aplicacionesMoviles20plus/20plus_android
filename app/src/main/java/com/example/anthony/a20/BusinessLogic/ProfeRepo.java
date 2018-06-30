@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class ProfeRepo implements IProfeRepo {
     @Override
     public Profesor getProfesor(String email) {
-        ArrayList<Profesor> profes=new ArrayList<>();
+        Profesor profe=new Profesor();
         URL apiUrl=null;
 
         try {
@@ -42,85 +42,79 @@ public class ProfeRepo implements IProfeRepo {
                 //Leyenso jason
                 JsonReader jsonReader=new JsonReader(responseBodyReader);
 
-                //Comenzar lectura del arreglo
-                jsonReader.beginArray();
 
-                //Leyendo elementos
-                while (jsonReader.hasNext()){
-                    //Leer cada objeto
-                    jsonReader.beginObject();
-                    int idprofesor     =0     ;
-                    String nombre        =""   ;
-                    String apellido      =""   ;
-                    String password      =""   ;
-                    String email2        =""    ;
-                    String celular       =""   ;
-                    String descripcion   =""   ;
-                    Double preciomin     =0.0     ;
-                    Double preciomax     =0.0     ;
-                    String  experiencia    ="" ;
-                    long calificacion      =0  ;
-                    long dni               =0  ;
-                    String antecedentes   =""  ;
-                    String fotourl        =""      ;
-                    int id_metodopago     =0 ;
-                    while(jsonReader.hasNext()){
-                        String property=jsonReader.nextName();
-                        switch(property.toLowerCase()){
-                            case "idprofesor":
-                                idprofesor=jsonReader.nextInt();
-                                break;
-                            case "nombre":
-                                nombre=jsonReader.nextString();
-                                break;
-                            case "apellido":
-                                apellido=jsonReader.nextString();
-                                break;
-                            case "password":
-                                password=jsonReader.nextString();
-                                break;
-                            case "email":
-                                email2=jsonReader.nextString();
-                                break;
-                            case "celular":
-                                celular=jsonReader.nextString();
-                                break;
-                            case "descripcion":
-                                descripcion=jsonReader.nextString();
-                                break;
-                            case "preciomin":
-                                preciomin=jsonReader.nextDouble();
-                                break;
-                            case "preciomax":
-                                preciomax=jsonReader.nextDouble();
-                                break;
-                            case "calificacion":
-                                calificacion=jsonReader.nextLong();
-                                break;
-                            case "dni":
-                                dni=jsonReader.nextLong();
-                                break;
-                            case "antecedentes":
-                                antecedentes=jsonReader.nextString();
-                                break;
-                            case "fotourl":
-                                fotourl=jsonReader.nextString();
-                                break;
-                            case "id_metodopago":
-                                id_metodopago=jsonReader.nextInt();
-                                break;
-                            default:
-                                jsonReader.skipValue();
-                                break;
-                        }
-                        //Agregar item a la lista
-
+                //Leer cada objeto
+                jsonReader.beginObject();
+                int idprofesor     =0     ;
+                String nombre        =""   ;
+                String apellido      =""   ;
+                String password      =""   ;
+                String email2        =""    ;
+                String celular       =""   ;
+                String descripcion   =""   ;
+                Double preciomin     =0.0     ;
+                Double preciomax     =0.0     ;
+                String  experiencia    ="" ;
+                long calificacion      =0  ;
+                long dni               =0  ;
+                String antecedentes   =""  ;
+                String fotourl        =""      ;
+                int id_metodopago     =0 ;
+                int x=0;
+                while(x<15){
+                    x++;
+                    String property=jsonReader.nextName();
+                    switch(property.toLowerCase()){
+                        case "idprofesor":
+                            idprofesor=jsonReader.nextInt();
+                            break;
+                        case "nombre":
+                            nombre=jsonReader.nextString();
+                            break;
+                        case "apellido":
+                            apellido=jsonReader.nextString();
+                            break;
+                        case "password":
+                            password=jsonReader.nextString();
+                            break;
+                        case "email":
+                            email2=jsonReader.nextString();
+                            break;
+                        case "celular":
+                            celular=jsonReader.nextString();
+                            break;
+                        case "descripcion":
+                            descripcion=jsonReader.nextString();
+                            break;
+                        case "preciomin":
+                            preciomin=jsonReader.nextDouble();
+                            break;
+                        case "preciomax":
+                            preciomax=jsonReader.nextDouble();
+                            break;
+                        case "calificacion":
+                            calificacion=jsonReader.nextLong();
+                            break;
+                        case "dni":
+                            dni=jsonReader.nextLong();
+                            break;
+                        case "antecedentes":
+                            antecedentes=jsonReader.nextString();
+                            break;
+                        case "fotourl":
+                            fotourl=jsonReader.nextString();
+                            break;
+                        case "id_metodopago":
+                            id_metodopago=jsonReader.nextInt();
+                            break;
+                        default:
+                            jsonReader.skipValue();
+                            break;
                     }
-                    Profesor obj=new Profesor( idprofesor,  nombre,  apellido,  password,  email2,  celular,  descripcion,  preciomin,  preciomax,  experiencia,  calificacion,  dni,  antecedentes,  fotourl,  id_metodopago);
-                    profes.add(obj);
-                    jsonReader.endObject();
+                    //Agregar item a la lista
                 }
-                jsonReader.endArray();
+                profe=new Profesor( idprofesor,  nombre,  apellido,  password,  email2,  celular,  descripcion,  preciomin,  preciomax,  experiencia,  calificacion,  dni,  antecedentes,  fotourl,  id_metodopago);
+                jsonReader.endObject();
                 jsonReader.close();
                 myConnection.disconnect();
 
@@ -135,7 +129,7 @@ public class ProfeRepo implements IProfeRepo {
             e.printStackTrace();
         }
 
-        return profes.get(0) ;
+        return profe;
     }
 
     @Override

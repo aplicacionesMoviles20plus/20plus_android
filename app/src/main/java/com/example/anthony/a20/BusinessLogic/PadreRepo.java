@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class PadreRepo implements IPadreRepo{
     @Override
     public Padre getPadre(String email) {
-        ArrayList<Padre> padres=new ArrayList<>();
+        Padre padres=new Padre();
         URL apiUrl=null;
 
         try {
@@ -41,12 +41,7 @@ public class PadreRepo implements IPadreRepo{
                 //Leyenso jason
                 JsonReader jsonReader=new JsonReader(responseBodyReader);
 
-                //Comenzar lectura del arreglo
-                jsonReader.beginArray();
 
-                //Leyendo elementos
-                while (jsonReader.hasNext()){
-                    //Leer cada objeto
                     jsonReader.beginObject();
                     int idpadre = 0 ;
                     String nombre ="";
@@ -60,7 +55,9 @@ public class PadreRepo implements IPadreRepo{
                     int celular =0;
                     int dni =0;
                     String fotourl="";
-                    while(jsonReader.hasNext()){
+                    int x=0;
+                    while(x<12){
+                        x++;
                         String property=jsonReader.nextName();
                         switch(property.toLowerCase()){
                             case "idpadre":
@@ -106,11 +103,8 @@ public class PadreRepo implements IPadreRepo{
                         //Agregar item a la lista
 
                     }
-                    Padre obj=new Padre(idpadre,nombre,apellido,password,email2,departamento,provincia,distrito,direccion,celular,dni,fotourl);
-                    padres.add(obj);
+                padres=new Padre(idpadre,nombre,apellido,password,email2,departamento,provincia,distrito,direccion,celular,dni,fotourl);
                     jsonReader.endObject();
-                }
-                jsonReader.endArray();
                 jsonReader.close();
                 myConnection.disconnect();
 
@@ -125,7 +119,7 @@ public class PadreRepo implements IPadreRepo{
             e.printStackTrace();
         }
 
-        return padres.get(0) ;
+        return padres;
 
     }
 
