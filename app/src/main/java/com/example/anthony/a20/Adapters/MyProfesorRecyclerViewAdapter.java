@@ -1,5 +1,11 @@
 package com.example.anthony.a20.Adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +15,10 @@ import android.widget.TextView;
 import com.example.anthony.a20.Entities.Profesor;
 import com.example.anthony.a20.Entities.Tutoria;
 import com.example.anthony.a20.R;
+import com.example.anthony.a20.Student.InfoProfeActivity;
+
 import com.example.anthony.a20.Student.ProfesorHomeFragment.OnListFragmentInteractionListener;
+import com.example.anthony.a20.Student.StudentActivity;
 
 
 import java.util.ArrayList;
@@ -38,7 +47,7 @@ public class MyProfesorRecyclerViewAdapter extends RecyclerView.Adapter<MyProfes
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getNombre());
         holder.mContentView.setText(mValues.get(position).getApellido());
@@ -47,9 +56,12 @@ public class MyProfesorRecyclerViewAdapter extends RecyclerView.Adapter<MyProfes
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    Intent intent = new Intent(v.getContext(), InfoProfeActivity.class);
+                    Bundle bundle = new Bundle();
+                    int id = mValues.get(position).getIdprofesor();
+                    bundle.putInt("idProfesorInfo",id);
+                    intent.putExtras(bundle);
+                    v.getContext().startActivity(intent);
                 }
             }
         });
